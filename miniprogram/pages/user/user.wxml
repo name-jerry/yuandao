@@ -1,0 +1,27 @@
+
+<!-- 头部 -->
+<view class="container">
+<view class="flex head p20 mgb20 ">
+    <navigator  url="#" hover-class="none" open-type="switchTab" ><image class="head_img" mode="widthFix" src="/images/midlogo.png" /></navigator>
+<text class="name">{{name}}</text>
+<view class="mgb20"><text class="bold">ID:</text>{{id}}</view>
+<!-- 信息烂 -->
+<view class="w100 flex mgb20">
+<block wx:for="{{infoList}}" wx:key="index">
+<view class="head_icon flex ">
+<text>{{item.count}}</text>
+{{item.name}}
+</view>
+</block>
+</view>
+</view>
+<!-- 选项栏 -->
+<view class=" item_wraper box_size">
+<block wx:for="{{itemList}}" wx:key="index" >
+<navigator class="w100 flex item flex1 box_size " url="{{item.url}}"  hover-class="active"   open-type="switchTab" >
+<text>{{item.name}}</text>
+<image src="/images/right.png" class="item_icon"/>
+</navigator>
+</block>
+</view>
+</view>

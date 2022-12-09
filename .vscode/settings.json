@@ -1,0 +1,10 @@
+{
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded", // sass编译后的文件是展开的
+      "extensionName": ".wxss", // 编译后后缀名 xxx.scss => xxx.wxss
+      "savePath": null // 编译后的文件路径, 为null 默认为scss文件同级
+    }
+  ],
+  "liveSassCompile.settings.generateMap": false // 去掉map文件
+}

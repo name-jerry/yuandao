@@ -1,0 +1,136 @@
+<!--index.wxml-->
+    <!-- 原生导航栏 -->
+ <page-meta>
+  <navigation-bar
+    title="{{nbTitle}}"
+    loading="{{nbLoading}}"
+    front-color="{{nbFrontColor}}"
+    background-color="{{nbBackgroundColor}}"
+    color-animation-duration="2000"
+    color-animation-timing-func="easeIn"
+  />
+</page-meta>
+<view 	 class="container">
+  <!-- 开头动画 -->
+  <canvas type="2d" id="myCanvas" class="myCanvas" wx:if="{{!showLogo}}"></canvas>
+<!-- 头像动画 -->
+<view class="turn {{end}}" wx:if="{{showLogo}}" bindtap="logoBackTop" bindanimationend="turnEnd" style="animation-play-state: {{state}}">
+  <block wx:for="{{text}}" wx:key="index">
+  <span class="chat"  style=" transform:rotate({{(index-3)*20}}deg); ">
+    {{item}}
+  </span>
+</block>
+  <view class="over" bindanimationend="overEnd" >
+ <navigator  url="#"  hover-class="none"   class="head">
+  <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
+  </navigator>
+ <navigator  url="#" hover-class="none"  class="head " >
+  <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
+  </navigator>
+</view>
+  </view>
+  <!-- 主要内容 -->
+  <view class="flex_item"><!--导航-->
+<view class="top box bloder  " >
+    <navigator hover-class="navigator-hover" >
+    <view class="" selectable="false" >
+      关于元岛
+    </view>
+  </navigator>
+     <navigator hover-class="navigator-hover" >
+    <view class="" selectable="false" >
+      企业服务
+    </view>
+  </navigator>
+   <navigator hover-class="navigator-hover" >
+    <view class="top_text" selectable="false" >
+      进群学习
+    </view>
+  </navigator>
+  </view>
+</view><!--导航-->
+
+<view class="flex_item"><!-- 消息 -->
+<view class="msgBox box  " >
+  <image class="{{(msgList.length>2 && showRemind)?'remind':'none'}}" src="../../images/msgRight.png" mode="aspectFit" lazy-load="false"  />
+  <view class="flex ">
+  <span class="blod ">新消息</span>
+  <span style="font-size: 0.8rem;color: var(--theme)">全部已读</span>
+  </view>
+  <scroll-view  scroll-x="true" 	enable-flex='true'	 class="content " bindscrolltolower='closeRemind'>
+<block wx:for="{{msgList}}" wx:key="index">
+  <view class="msg "  >
+    <view class="title lines" style="--lines:2">
+      {{item.title}}
+    </view>
+       <text class="time">{{item.time}}</text>
+  </view>
+</block>
+  </scroll-view>
+</view>
+</view><!-- 消息 -->
+<view class="flex_item"><!-- 作业-->
+<view class="course box flex_box ">
+ <view class="flex mrgin5" style="flex:none">
+  <span class="blod flex1 lines" style="font-size: 1rem;--lines:1">当前进度:{{course.title}}</span>
+  <span style="font-size: 0.8rem;color: var(--theme)" class="flex_none">课程目录</span>
+  </view>
+  <view class="flex mrgin5"><!-- 摘要 -->
+  <view class="subhead">
+      摘要:
+  </view>
+      <view class="flex1 lines" style="--lines:3">
+        {{course.content}}
+      </view>
+  </view><!-- 摘要 -->
+    <view class="flex  "><!-- 作业 -->
+  <view class="subhead"> 作业:</view>
+      <view class="flex1 lines" style="--lines:3">{{course.content}}</view>
+  </view><!-- 作业-->
+    <view class="flex mrgin5"><!-- 奖励 -->
+  <view class="subhead"> 奖励:</view>
+      <view class="award">
+        <block wx:for="{{course.award}}" wx:key="index">
+          <view wx:if="{{index=='level'}}" style='color:var(--theme);'>
+            {{'等级+'+item}}
+          </view>
+          <view wx:elif="{{index=='gold'}}" style='color: rgb(230, 199, 25)'>
+            {{'金币+'+item}}
+          </view>
+          <view  wx:elif="{{index=='score'}}" style=' color: rgb(255, 115, 0);'>
+            {{'积分+'+item}}
+          </view>
+        </block>
+      </view>
+  </view><!-- 奖励-->
+  <view class="operate bloder flex mrgin5"><!--操作-->
+    <navigator hover-class="none" >
+    <view>
+      常见问题
+    </view>
+  </navigator>
+     <navigator hover-class="none" >
+    <view>
+      学习分享
+    </view>
+  </navigator>
+   <navigator hover-class="none" >
+    <view style="color:var(--theme-min)">
+      提交作业
+    </view>
+  </navigator>
+</view><!--操作-->
+</view>
+</view><!-- 作业 -->
+<view class="flex_item"><!-- 社区 -->
+<view class="group box flex_box  ">
+  <block wx:for="{{groupList}}" wx:key="index">
+    <navigator class="mrgin5 item bloder" target="" url="{{item.url}}" hover-class="active" open-type="navigate">     
+    <view >
+      {{item.title}}
+    </view>
+    </navigator>
+  </block>
+  </view>
+</view>
+</view>
