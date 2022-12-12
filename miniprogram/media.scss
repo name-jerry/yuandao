@@ -1,0 +1,67 @@
+//xs手机,sm平板,md电脑,lg宽屏,xl暂时不用
+//单独设置@include xs{color:red}
+//多设备同时设置
+// @include media(
+//     background-color,
+//     (
+//       xs: red,
+//       sm: black,
+//       md: blue,
+//       lg: gay,
+//     )
+$mobile-size: 768px;
+$pad-size: 992px;
+$pc-size: 1200px;
+$max-size: 1920px;
+@mixin xs {
+  @media screen and (max-width: ($mobile-size -  1px)) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (min-width: $mobile-size) {
+    @content;
+  }
+}
+@mixin md {
+  @media screen and (min-width: $pad-size) {
+    @content;
+  }
+}
+@mixin lg {
+  @media screen and (min-width: $pc-size) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media screen and (min-width: $max-size) {
+    @content;
+  }
+}
+@mixin media($propName, $vals) {
+  @each $i, $val in $vals {
+    @if $i==xs {
+      @include xs {
+        #{$propName}: $val;
+      }
+    } @else if $i==sm {
+      @include sm {
+        #{$propName}: $val;
+      }
+    } @else if $i==md {
+      @include md {
+        #{$propName}: $val;
+      }
+    } @else if $i==lg {
+      @include lg {
+        #{$propName}: $val;
+      }
+    } @else if $i==xl {
+      @include lg {
+        #{$propName}: $val;
+      }
+    }
+  }
+}

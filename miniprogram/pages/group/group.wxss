@@ -1,17 +1,15 @@
 @charset "UTF-8";
 /* pages/form/form.wxss */
 .container {
-  padding: 1rem;
   padding-top: 1.5rem;
   line-height: 2rem;
   font-size: 1rem;
+  flex-flow: row wrap;
 }
 
-.flex_box {
-  flex-flow: row wrap;
-  justify-content: space-around;
-  padding-top: 1.2rem;
+.form {
   position: relative;
+  flex-direction: column;
 }
 
 .fieldset {
@@ -25,79 +23,12 @@
 }
 
 .flex_item {
-  flex: auto;
-  display: flex;
-}
-.flex_item .content {
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  margin-left: 0.5rem;
+  padding: 0;
+  margin: 0.6rem;
 }
 
-.input {
-  flex: 1 1 8rem;
-  display: flex;
-  justify-content: space-between;
-  box-shadow: var(--shadow-input);
-  box-sizing: border-box;
-  border-radius: calc(var(--border-radius) / 2);
-}
-
-.name .input {
-  padding-left: 0.5rem;
-  height: 2rem;
-  margin-left: 0.5rem;
-}
-
-.area,
-.age {
-  flex: 1 1 14rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.area .content,
-.age .content {
-  max-height: 2rem;
-  flex: 1;
-  position: relative;
-}
-
-.area .input,
-.age .input {
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.tel {
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  flex: 1 1 13rem;
-}
-.tel .input {
-  flex: 1 1 12rem;
-  justify-content: flex-start;
-  padding-left: 0.5rem;
-  height: 2rem;
-}
-
-.info {
-  flex-direction: column;
-  flex: 1 1 100%;
-}
-.info .input {
-  width: 100%;
-  text-indent: 0.5rem;
-}
-
-.text {
-  font-size: 1rem;
-  color: rebeccapurple;
+.name .content .subhead {
+  background-color: rebeccapurple;
 }
 
 .btnGroup {
@@ -190,7 +121,7 @@ radio .wx-radio-input.wx-radio-input-checked::after {
   content: "";
   top: -10%;
   left: -10%;
-  width: 220%;
+  width: 280%;
   height: 120%;
   border-radius: 40%;
   background: transparent;

@@ -1,44 +1,50 @@
 <!--pages/form/form.wxml-->
-<form class=".container flex_box form" action="" bindsubmit="submit">
-    
+<view class='container'>
+<form  action="" bindsubmit="submit">
+  <view class="box flex_box ">
+    <text class="fieldset bloder">表单</text>
     <view class="flex_item name">
-        <view class="flex_center">
         姓名:
     <input type="text"   name="name" class="input"/>
-        </view>
     </view>
-
     <view class="flex_item sex">
-    <radio-group name='sex' class="flex_center" >性别:
+      性别:
+    <radio-group name='sex' class="content" >
     <label ><radio value='man'  />  男</label>
     <label><radio value='woman' />  女</label>
     </radio-group>
     </view>
     <view class="flex_item age">
-        <view class="flex_center">
         出生年月:
-        <picker mode="date" value="{{age}}" data-type='age' fields="day" class='flex1'
-        start="1960-01-01" end="2022-09-01" bindchange="pickerChange">
-    <view class="input flex_center">
+        <picker mode="date" value="{{age}}"  name='age' class="content" data-type='age' fields="day" 
+        start="1960-01-01" end="2022-09-01" bindchange="pickerChange" >
+    <view  class="input">
        {{age}}
     </view>
   </picker>
     </view>
-    </view>
       <view class="flex_item area">
-        <view class="flex_center">
         地区(可选):
-        <picker mode="region" value="{{area}}" data-type='area' custom-item='全部' class='flex1'
+        <picker mode="region" value="{{area}}" name='area' class="content" data-type='area' custom-item='全部' 
         bindchange="pickerChange">
-    <view class="input flex_center">
-       当前{{area[0]}}{{area[1]}}{{area[2]}}
+    <view class="input " >
+       {{area[0]}}{{area[1]}}{{area[2]}}
     </view>
   </picker>
     </view>
+    <view class="tel flex_item" >
+      可以添加到你的联系方式:
+      <input type="number" name="tel" class="input" placeholder-style=" font-family: Tahoma, Verdana, kaiti, Times, serif;" placeholder="以防小组成员加不到你"/>
     </view>
-    <view  class="flex_item btn">
-    <button type="submit">提交</button>
-    <button type="reset">重置</button>
+     <view class="info flex_item" >
+      你的基础情况
+      <textarea name="info" class="input"  placeholder="介绍你的基础情况"></textarea>
     </view>
-    
+    <view  class="flex_item btnGroup">
+    <button class="btn" hover-class="active" form-type="submit" >提交</button>
+    <button class="btn" hover-class="active" form-type="reset"  >重置</button>
+    </view>
+    </view>
 </form>
+
+</view>

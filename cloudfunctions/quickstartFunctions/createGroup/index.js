@@ -1,56 +1,50 @@
-const cloud = require('wx-server-sdk');
+const cloud = require("wx-server-sdk");
 
 cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
+  env: cloud.DYNAMIC_CURRENT_ENV,
 });
 
 const db = cloud.database();
 
-// 创建集合云函数入口函数
 exports.main = async (event, context) => {
-  try {
-    // 创建集合
-    await db.createCollection('sales');
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华东',
-        city: '上海',
-        sales: 11
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华东',
-        city: '南京',
-        sales: 11
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华南',
-        city: '广州',
-        sales: 22
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华南',
-        city: '深圳',
-        sales: 22
-      }
-    });
-    return {
-      success: true
-    };
-  } catch (e) {
-    // 这里catch到的是该collection已经存在，从业务逻辑上来说是运行成功的，所以catch返回success给前端，避免工具在前端抛出异常
-    return {
-      success: true,
-      data: 'create collection success'
-    };
-  }
+  //获取openId
+  const u = event.data;
+  console.log(u);
+  const wxContext = cloud.getWXContext();
+  const openId = wxContext.OPENID;
+  //获取小组id
+  let res = await db.collection("group").count();
+  let groupId = parseInt(res.total) + 1;
+  await db.collection("group").add({
+    // data 字段表示需新增的 JSON 数据
+    data: {
+      name: u.name,
+      sex: u.sex,
+      age: u.age,
+      area: u.area,
+      tel: u.tel,
+      info: u.info,
+      member: 1,
+      openId,
+      groupId,
+    },
+  });
+  await db.collection("form").add({
+    // data 字段表示需新增的 JSON 数据
+    data: {
+      name: u.name,
+      sex: u.sex,
+      age: u.age,
+      area: u.area,
+      tel: u.tel,
+      info: u.info,
+      isLeader: true,
+      openId,
+      groupId,
+    },
+  });
+
+  return {
+    success: true,
+  };
 };

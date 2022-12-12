@@ -1,20 +1,61 @@
-const cloud = require('wx-server-sdk');
+const cloud = require("wx-server-sdk");
 
 cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
+  env: cloud.DYNAMIC_CURRENT_ENV,
 });
 
-// 获取小程序二维码云函数入口函数
+const db = cloud.database();
 exports.main = async (event, context) => {
-  // 获取小程序二维码的buffer
-  const resp = await cloud.openapi.wxacode.get({
-    path: 'pages/index/index'
-  });
-  const { buffer } = resp;
-  // 将图片上传云存储空间
-  const upload = await cloud.uploadFile({
-    cloudPath: 'code.png',
-    fileContent: buffer
-  });
-  return upload.fileID;
+  //获取openId
+  const u = event.data;
+  const wxContext = cloud.getWXContext();
+  const openId = wxContext.OPENID;
+  //获取小组id
+  let res = await db
+    .collection("group")
+    .where({
+      groupId: u.groupId,
+    })
+    .get();
+  if (res && res.data && res.data.length) {
+    const g = res.data[0];
+    if (g.member >= 5) {
+      return {
+        success: false,
+        errorMessage: "人数已满",
+      };
+    }
+    await db
+      .collection("group")
+      .where({
+        groupId: u.groupId,
+      })
+      .update({
+        data: {
+          member: g.member + 1,
+        },
+      });
+    await db.collection("form").add({
+      data: {
+        name: u.name,
+        sex: u.sex,
+        age: u.age,
+        area: u.area,
+        tel: u.tel,
+        info: u.info,
+        isLeader: false,
+        groupId: u.groupId,
+        openId,
+      },
+    });
+    return {
+      success: true,
+      tel: g.tel,
+      groupId: u.groupId,
+    };
+  }
+  return {
+    success: false,
+    errorMessage: "无该小组",
+  };
 };

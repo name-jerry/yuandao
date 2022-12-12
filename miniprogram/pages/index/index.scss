@@ -1,15 +1,6 @@
 $head_width: 5rem;
 //通用样式
-.box {
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  width: 100%;
-}
-.bloder {
-  font-family: sans-serif;
-  font-weight: bolder;
-  color: var(--theme);
-}
+
 .blod {
   font-weight: bold;
 }
@@ -19,12 +10,7 @@ $head_width: 5rem;
 .mrgin5 {
   margin: 0.5rem;
 }
-.container {
-  position: relative;
-  padding: 0.5rem;
-  padding-top: 1rem;
-  overflow: auto;
-}
+
 //代码雨
 .myCanvas {
   position: absolute;
@@ -66,7 +52,7 @@ $head_width: 5rem;
     left: -1.8rem;
     top: 50%;
     border-top-right-radius: 2rem;
-    box-shadow: 0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.808);
+    box-shadow: 0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
   }
   &::after {
     position: absolute;
@@ -78,7 +64,7 @@ $head_width: 5rem;
     right: -1.8rem;
     top: 50%;
     border-top-left-radius: 2rem;
-    box-shadow: -0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.808);
+    box-shadow: -0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
   }
   //回归后设计出现
   &.end::before,
@@ -137,7 +123,10 @@ $head_width: 5rem;
     left: 50%;
   }
 }
-
+.container {
+  position: relative;
+  padding-top: 1rem;
+}
 // 头部导航
 .top {
   position: relative;
@@ -213,9 +202,7 @@ $head_width: 5rem;
 }
 //作业
 .course {
-  display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   font-size: 0.9rem;
   line-height: 1rem;
   .flex {
@@ -243,11 +230,9 @@ $head_width: 5rem;
 }
 // 社区
 .group {
-  width: 100%;
-  box-sizing: border-box;
+  flex-flow: row wrap;
   .item {
-    flex: none;
-    width: 5rem;
+    flex: 1 1 5rem;
     box-shadow: var(--shadow-hover);
     border-radius: calc(var(--border-radius) / 2);
     display: flex;

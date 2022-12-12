@@ -3,36 +3,34 @@
   flex-direction: column;
   box-sizing: border-box;
   padding: 0.5rem;
+  .row {
+    flex: 1;
+    display: flex;
+    margin: 0.2rem;
+    .subhead {
+      margin-right: 1rem;
+    }
+  }
 }
-.group .content .row {
-  flex: 1;
-  display: flex;
-  margin: 0.2rem;
-}
-.group .content .row .subhead {
-  margin-right: 1rem;
-}
-
 .head .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.head .content .subhead {
-  font-size: 1.1rem;
-}
-.head .content .bloder {
-  font-size: 0.8rem;
+  .subhead {
+    font-size: 1.1rem;
+  }
+  .bloder {
+    font-size: 0.8rem;
+  }
 }
 
 .last {
   justify-content: center;
   align-items: center;
+  .text {
+    font-size: 1.4rem;
+  }
 }
-.last .text {
-  font-size: 1.4rem;
-}
-
 .btn {
   margin: 0.5rem;
   border-radius: calc(var(--border-radius) * 2);

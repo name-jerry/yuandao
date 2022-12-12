@@ -1,16 +1,4 @@
 @charset "UTF-8";
-.box {
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  width: 100%;
-}
-
-.bloder {
-  font-family: sans-serif;
-  font-weight: bolder;
-  color: var(--theme);
-}
-
 .blod {
   font-weight: bold;
 }
@@ -21,13 +9,6 @@
 
 .mrgin5 {
   margin: 0.5rem;
-}
-
-.container {
-  position: relative;
-  padding: 0.5rem;
-  padding-top: 1rem;
-  overflow: auto;
 }
 
 .myCanvas {
@@ -73,7 +54,7 @@
   left: -1.8rem;
   top: 50%;
   border-top-right-radius: 2rem;
-  box-shadow: 0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.808);
+  box-shadow: 0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
 }
 .turn::after {
   position: absolute;
@@ -85,7 +66,7 @@
   right: -1.8rem;
   top: 50%;
   border-top-left-radius: 2rem;
-  box-shadow: -0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.808);
+  box-shadow: -0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
 }
 .turn.end::before, .turn.end::after {
   visibility: visible;
@@ -165,6 +146,11 @@
     left: 50%;
   }
 }
+.container {
+  position: relative;
+  padding-top: 1rem;
+}
+
 .top {
   position: relative;
   min-height: 4rem;
@@ -247,9 +233,7 @@
   }
 }
 .course {
-  display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   font-size: 0.9rem;
   line-height: 1rem;
 }
@@ -277,12 +261,10 @@
 }
 
 .group {
-  width: 100%;
-  box-sizing: border-box;
+  flex-flow: row wrap;
 }
 .group .item {
-  flex: none;
-  width: 5rem;
+  flex: 1 1 5rem;
   box-shadow: var(--shadow-hover);
   border-radius: calc(var(--border-radius) / 2);
   display: flex;

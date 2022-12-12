@@ -30,8 +30,7 @@
 </view>
   </view>
   <!-- 主要内容 -->
-  <view class="flex_item"><!--导航-->
-<view class="top box bloder  " >
+<view class="top box bloder flex_item " ><!--导航-->
     <navigator hover-class="navigator-hover" >
     <view class="" selectable="false" >
       关于元岛
@@ -47,11 +46,9 @@
       进群学习
     </view>
   </navigator>
-  </view>
 </view><!--导航-->
 
-<view class="flex_item"><!-- 消息 -->
-<view class="msgBox box  " >
+<view class="msgBox box flex_item" ><!-- 消息 -->
   <image class="{{(msgList.length>2 && showRemind)?'remind':'none'}}" src="../../images/msgRight.png" mode="aspectFit" lazy-load="false"  />
   <view class="flex ">
   <span class="blod ">新消息</span>
@@ -67,10 +64,8 @@
   </view>
 </block>
   </scroll-view>
-</view>
 </view><!-- 消息 -->
-<view class="flex_item"><!-- 作业-->
-<view class="course box flex_box ">
+<view class="course box flex_box flex_item"><!-- 作业-->
  <view class="flex mrgin5" style="flex:none">
   <span class="blod flex1 lines" style="font-size: 1rem;--lines:1">当前进度:{{course.title}}</span>
   <span style="font-size: 0.8rem;color: var(--theme)" class="flex_none">课程目录</span>
@@ -83,7 +78,7 @@
         {{course.content}}
       </view>
   </view><!-- 摘要 -->
-    <view class="flex  "><!-- 作业 -->
+    <view class="flex  mrgin5 "><!-- 作业 -->
   <view class="subhead"> 作业:</view>
       <view class="flex1 lines" style="--lines:3">{{course.content}}</view>
   </view><!-- 作业-->
@@ -120,10 +115,8 @@
     </view>
   </navigator>
 </view><!--操作-->
-</view>
 </view><!-- 作业 -->
-<view class="flex_item"><!-- 社区 -->
-<view class="group box flex_box  ">
+<view class="group box flex_box  flex_item"><!-- 社区 -->
   <block wx:for="{{groupList}}" wx:key="index">
     <navigator class="mrgin5 item bloder" target="" url="{{item.url}}" hover-class="active" open-type="navigate">     
     <view >
@@ -131,6 +124,5 @@
     </view>
     </navigator>
   </block>
-  </view>
 </view>
 </view>

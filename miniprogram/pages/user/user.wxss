@@ -1,8 +1,4 @@
 /* pages/user/user.wxss */
-.container {
-  justify-content: space-between;
-  padding: 1rem;
-}
 .head {
   flex-direction: column;
   align-items: center;
@@ -40,13 +36,12 @@
 .item_wraper {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  flex: 1;
   border-radius: var(--border-radius);
 }
 .item {
   padding-left: 0.5rem;
   padding-right: 1rem;
+  min-height: 2.5rem;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-hover);
@@ -70,8 +65,8 @@
   box-sizing: border-box;
 }
 .p20 {
-  padding: 0.6rem;
+  padding: 0.5rem;
 }
 .mgb20 {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
