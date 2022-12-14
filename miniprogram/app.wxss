@@ -76,6 +76,9 @@ page {
 .active {
   box-shadow: var(--shadow-active) !important;
 }
+.input {
+  box-shadow: var(--shadow-input);
+}
 button {
   box-shadow: var(--shadow-hover);
 }

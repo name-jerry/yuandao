@@ -71,7 +71,7 @@ $h: 2rem;
   top: 0;
   left: 0;
 }
-.tel {
+.web {
   flex-wrap: wrap;
   justify-content: flex-start;
   flex: 1 1 13rem;
@@ -79,6 +79,7 @@ $h: 2rem;
     flex: 1 1 12rem;
     justify-content: flex-start;
     padding-left: 0.5rem;
+    margin-left: 0.5rem;
     height: $h;
   }
 }

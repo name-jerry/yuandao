@@ -31,20 +31,14 @@
   </view>
   <!-- 主要内容 -->
 <view class="top box bloder flex_item " ><!--导航-->
-    <navigator hover-class="navigator-hover" >
-    <view class="" selectable="false" >
+    <navigator hover-class="active" >
       关于元岛
-    </view>
   </navigator>
-     <navigator hover-class="navigator-hover" >
-    <view class="" selectable="false" >
+     <navigator hover-class="active" >
       企业服务
-    </view>
   </navigator>
-   <navigator hover-class="navigator-hover" >
-    <view class="top_text" selectable="false" >
+   <navigator hover-class="active" >
       进群学习
-    </view>
   </navigator>
 </view><!--导航-->
 

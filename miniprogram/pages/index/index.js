@@ -50,11 +50,12 @@ Page({
       { title: "申请学金", url: "" },
       { title: "事物讨论", url: "" },
       { title: "招聘就业", url: "" },
-      { title: "创建小组", url: "/pages/form/form" },
+      { title: "创建小组", url: "/pages/group/group" },
       { title: "加入小组", url: "/pages/groupList/groupList" },
-      { title: "我的小组", url: "/pages/group/group" },
+      { title: "我的小组", url: "/pages/groupList/groupList?isMyGroup=true" },
     ],
   },
+  onLoad() {},
   onReady() {
     const that = this.data;
     const query = wx.createSelectorQuery();

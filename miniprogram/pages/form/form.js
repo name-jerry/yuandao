@@ -5,21 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user: "",
     age: "",
     area: [],
-    groupId: "",
+    openId: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    if (options && options.groupId) {
-      console.log(options.groupId);
-      this.setData({
-        groupId: options.groupId,
-      });
-    }
+    const updateUser = () => {
+      console.log("this.data.user");
+      let user = wx.getStorageSync("user");
+      if (user) {
+        this.setData({
+          user: { ...user },
+        });
+      } else {
+        callCloud("createUser").then(res => {
+          let _ = res.result;
+          if (_.success) {
+            wx.setStorageSync("user", _.data);
+            this.setData({
+              user: _.data,
+            });
+          }
+        });
+      }
+    };
+    const types = { updateUser };
+    let fn = types[options.type];
+    fn && fn();
+    !fn && console.log(options.type + "不存在");
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -160,6 +160,9 @@
   display: flex;
   justify-content: space-around;
 }
+.top .active {
+  height: 1.1rem;
+}
 
 .top_text {
   color: var(--theme-min);

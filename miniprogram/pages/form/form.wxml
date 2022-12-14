@@ -2,16 +2,16 @@
 <view class='container'>
 <form  action="" bindsubmit="submit">
   <view class="box flex_box ">
-    <text class="fieldset bloder">表单</text>
+    <text class="fieldset bloder">信息</text>
     <view class="flex_item name">
         姓名:
-    <input type="text"   name="name" class="input"/>
+    <input type="text" value="{{user.name}}"  name="name" class="input"/>
     </view>
     <view class="flex_item sex">
       性别:
-    <radio-group name='sex' class="content" >
-    <label ><radio value='man'  />  男</label>
-    <label><radio value='woman' />  女</label>
+    <radio-group name='sex'  class="content" >
+    <label ><radio value='man' checked="{{user.sex=='man'}}" />  男</label>
+    <label><radio value='woman' checked="{{user.sex=='woman'}}" />  女</label>
     </radio-group>
     </view>
     <view class="flex_item age">
@@ -32,13 +32,13 @@
     </view>
   </picker>
     </view>
-    <view class="tel flex_item" >
-      可以添加到你的联系方式:
-      <input type="number" name="tel" class="input" placeholder-style=" font-family: Tahoma, Verdana, kaiti, Times, serif;" placeholder="以防小组成员加不到你"/>
+    <view class="web flex_item" >
+      个人网站:
+      <input type="text" name="web" class="input" placeholder-style=" font-family: Tahoma, Verdana, kaiti, Times, serif;" placeholder="展示你的作品"/>
     </view>
      <view class="info flex_item" >
-      你的基础情况
-      <textarea name="info" class="input"  placeholder="介绍你的基础情况"></textarea>
+      个性签名
+      <textarea name="info" class="input"  placeholder="60字以内"></textarea>
     </view>
     <view  class="flex_item btnGroup">
     <button class="btn" hover-class="active" form-type="submit" >提交</button>

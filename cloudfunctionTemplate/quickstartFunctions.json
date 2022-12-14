@@ -1,0 +1,9 @@
+[
+    {
+        "name": "常规",
+        "value": {
+            "type": "createUser",
+            "data": {}
+        }
+    }
+]

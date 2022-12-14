@@ -54,7 +54,7 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/group/group",
+                    "pathName": "pages/index/index",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

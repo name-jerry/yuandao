@@ -6,14 +6,20 @@ Page({
    */
   data: {
     groupList: [],
+    isMyGroup: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    callCloud("getManyGroup").then(res => {
+    const isMyGroup = options.isMyGroup || false;
+    this.setData({
+      isMyGroup,
+    });
+    callCloud("getManyGroup", { isMyGroup }).then(res => {
       const d = res.result;
+      console.log(res);
       if (d.success) {
         this.setData({
           groupList: d.data,

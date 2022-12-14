@@ -4,7 +4,7 @@
   <view class="box flex_box form">
     <text class="fieldset bloder">小组</text>
       <view class="flex_item name">
-        <view class="subhead">小组名</view> 
+        <view class="subhead">小组名:</view> 
         <view class="text">
           小组名必须突出特点，比如某个技术-java学习，
           某个项目-论坛项目，某个兴趣-机器人技术，某个目标-今天你成为CTO了吗
@@ -13,30 +13,40 @@
       </view>
       <view class="flex_item type">
         <view class="subhead">小组类型:</view>
-          <radio-group name='type' class="text" >
+          <radio-group name='type' class="content" >
           <label ><radio value='0'/>兴趣</label>
           <label><radio value='1'/>项目</label>
           <label><radio value='2'/>目标</label>
           </radio-group>
       </view>
-      <view class="flex_item limit">
+      <view class="flex_item permission">
         <view class="subhead">进组审批:</view>
-        <radio-group name='limit' class="text" >
+        <radio-group name='permission' class="content" >
         <label ><radio value='0'/>无需</label>
         <label><radio value='1'/>需要</label>
         </radio-group>
       </view>
       <view class="flex_item limit">
-        <view class="subhead">限制项:</view>
-          <radio-group name='limit' class="text" >
-          <label ><radio value='0'/>活跃</label>
-          <label><radio value='1'/>等级</label>
-          <label><radio value='2'/>年龄</label>
-          </radio-group>
-      </view>
+        <view class="wrap">
+          <view class="subhead">限制项:</view>
+            <checkbox-group name='limit' class="content" bindchange="chenckChange">
+            <label ><checkbox value='active'/>活跃</label>
+            <label><checkbox value='level'/>等级</label>
+            <label><checkbox value='age'/>年龄</label>
+            </checkbox-group>
+          </view>
+          <block wx:if="{{showLevel}}">
+            <view >等级</view>
+            <input type="number" name='level'	maxlength='2'  placeholder="要求至少多少级的用户才能加入,只写数字" class="input"/>
+          </block>
+            <block wx:if="{{showAge}}">
+            <view>年龄</view>
+            <input type="number" name='age'	maxlength='2' placeholder="要求至少多少岁的用户才能加入,只写数字" class="input"/>
+          </block>
+        </view>
       <view class="info flex_item">
       <view class="subhead">小组介绍:</view>    
-      <textarea name="info" class="input"  placeholder="20-300字"></textarea>
+      <textarea name="info" class="input" placeholder="20-300字"></textarea>
       </view>
       <view class="flex_item btnGroup"> 
       <button class="btn" hover-class="active" form-type="submit" >提交</button>

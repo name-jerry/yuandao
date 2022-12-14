@@ -13,21 +13,23 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   const openId = wxContext.OPENID;
   //获取小组id
-  let res = await db.collection("groupList").count();
-  let groupId = parseInt(res.total) + 1;
-  await db.collection("groupList").add({
-    data: {
-      name,
-      type,
-      permission,
-      limit,
-      info,
-      member: 1,
-      openId,
-      groupId,
-    },
-  });
-  return {
-    success: true,
-  };
+  let d = await db.collection("userList").where({ openId }).get();
+  if (!d.data.length) {
+    return {
+      success: false,
+      errorMessage: "不存在",
+    };
+  } else {
+    await db
+      .collection("userList")
+      .where({
+        openId,
+      })
+      .update({
+        data: {},
+      });
+    return {
+      success: true,
+    };
+  }
 };
