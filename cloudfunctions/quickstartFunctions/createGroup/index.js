@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
   const openId = wxContext.OPENID;
   //是否已经是队长
   let userRes = await db.collection("userList").where({ openId }).get();
-  if (userRes?.data?.[0]?.leaderGroup)
+  if (userRes && userRes.data && userRes.data[0] && userRes.data[0].leaderGroup)
     return {
       success: false,
       errorMessage: "已经创建过一个小组",

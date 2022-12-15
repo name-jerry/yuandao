@@ -13,7 +13,8 @@ exports.main = async (event, context) => {
   let res;
   if (isMyGroup) {
     let userRes = await db.collection("userList").where({ openId }).get();
-    let groupList = userRes?.data?.[0]?.groupList;
+    let groupList =
+      userRes && userRes.data && userRes.data[0] && userRes.data[0].groupList;
     if (!groupList)
       return {
         success: true,
