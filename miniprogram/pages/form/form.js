@@ -1,4 +1,4 @@
-import { callCloud } from "../../common.js";
+import { callCloud, getDataLocallyOrCloud, check } from "../../common.js";
 // pages/form/form.js
 Page({
   /**
@@ -6,45 +6,35 @@ Page({
    */
   data: {
     user: "",
-    age: "",
-    area: [],
-    openId: "",
+    oldUser: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const updateUser = () => {
-      console.log("this.data.user");
-      let user = wx.getStorageSync("user");
+    let today = new Date().toISOString().split("T")[0];
+    getDataLocallyOrCloud("user").then(res => {
+      let user = res.result?.data || res;
       if (user) {
         this.setData({
           user: { ...user },
+          oldUser: { ...user },
         });
       } else {
-        callCloud("createUser").then(res => {
-          let _ = res.result;
-          if (_.success) {
-            wx.setStorageSync("user", _.data);
-            this.setData({
-              user: _.data,
-            });
-          }
+        wx.showToast({
+          title: "网络异常",
+          icon: "error",
         });
       }
-    };
-    const types = { updateUser };
-    let fn = types[options.type];
-    fn && fn();
-    !fn && console.log(options.type + "不存在");
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {},
   submit(e) {
-    let _ = this.data;
+    // 表单验证
     const data = e.detail.value;
     for (const i in data) {
       if (i != "area" && !data[i]) {
@@ -55,36 +45,67 @@ Page({
         });
       }
     }
-    const age = new Date().getFullYear() - data.age.split("-")[0];
-    if (_.groupId) {
-      const groupId = parseInt(_.groupId);
-      callCloud("joinGroup", { groupId }).then(res => {
-        showSuccess(res);
-      });
-    } else {
-      callCloud("createGroup", { ...data, age }).then(res => showSuccess(res));
+    //判断是否有修改数据
+    let isUpdate = false;
+    for (const i in data) {
+      if (i != "area" && data[i] != this.data.oldUser[i]) {
+        isUpdate = true;
+      } else if (i == "area") {
+        data.area.map((value, index) => {
+          if (this.data.user.area[index] != value) {
+            return (isUpdate = true);
+          }
+        });
+      }
     }
-    function showSuccess(res) {
-      console.log(res);
-      if (res && res.result && res.result.success) {
+    if (!isUpdate)
+      return wx.showToast({
+        title: "成功",
+        icon: "success",
+        duration: 1000,
+      });
+    //上传更新
+    callCloud("updateUser", this.data.user).then(res => {
+      if (res?.result?.success) {
         wx.showToast({
           title: "成功",
           icon: "success",
           duration: 1000,
         });
+        // 同步数据
+        let newUser = this.data.user;
+        wx.setStorageSync("user", newUser);
+        this.setData({
+          oldUser: { ...newUser },
+        });
       } else {
         wx.showToast({
-          title: res.result.errorMessage,
-          icon: "error",
+          title: "异常",
+          icon: "errr",
           duration: 1000,
         });
       }
-    }
+    });
   },
-  pickerChange(e) {
-    const type = e.target.dataset.type;
+  reset() {
     this.setData({
-      [type]: e.detail.value,
+      user: { ...this.data.oldUser },
+    });
+  },
+  change(e) {
+    const user = this.data.user;
+    const type = e.target.dataset.type;
+    user[type] = e.detail.value;
+    this.setData({
+      user,
+    });
+  },
+  input(e) {
+    const user = this.data.user;
+    const type = e.target.dataset.type;
+    user[type] = e.detail.value;
+    this.setData({
+      user,
     });
   },
 });

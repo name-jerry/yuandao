@@ -19,7 +19,7 @@ $head_width: 5rem;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: var(--view-height);
   animation-play-state: running;
 }
 //logo
@@ -81,7 +81,7 @@ $head_width: 5rem;
   height: 100%;
   border-radius: 50%;
   transform-style: preserve-3d;
-  animation: head 4s ease 1 forwards;
+  animation: head 3s ease 1 forwards;
   transition: 0.3s;
   box-shadow: var(--shadow);
 }

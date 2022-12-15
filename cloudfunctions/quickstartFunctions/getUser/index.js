@@ -10,9 +10,8 @@ exports.main = async (event, context) => {
   //获取openId
   const wxContext = cloud.getWXContext();
   const openId = wxContext.OPENID;
-  const u = event.data;
   let d = await db.collection("userList").where({ openId }).get();
-  //无此人,初次登录,注册一个人物
+  //无此人,初次登录,注册一个人物,并返回
   if (!d.data.length) {
     let data = {
       headImg:
@@ -31,26 +30,8 @@ exports.main = async (event, context) => {
       success: true,
       data,
     };
-    //有此人时判断是否form表单,更新数据
-  } else if (u) {
-    const { headImg, name, sex, age, area, web, info } = u;
-    let res = await db.collection("userList").where({ openId }).update({
-      data: {
-        headImg,
-        name,
-        sex,
-        age,
-        area,
-        web,
-        info,
-      },
-    });
-    console.log(res);
-    return {
-      success: true,
-    };
   }
-  //返回数据
+  //有此人返回数据
   return {
     success: true,
     data: d.data[0],

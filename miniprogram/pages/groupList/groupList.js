@@ -1,4 +1,4 @@
-import { callCloud } from "../../common.js";
+import { callCloud, check, getDataLocallyOrCloud } from "../../common.js";
 // pages/list/list.js
 Page({
   /**
@@ -7,18 +7,25 @@ Page({
   data: {
     groupList: [],
     isMyGroup: false,
+    user: "",
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const isMyGroup = options.isMyGroup || false;
+    const isMyGroup = options?.isMyGroup || false;
     this.setData({
       isMyGroup,
     });
+    getDataLocallyOrCloud("user").then(res => {
+      let user = res?.result?.data || res;
+      user &&
+        this.setData({
+          user,
+        });
+    });
     callCloud("getManyGroup", { isMyGroup }).then(res => {
-      const d = res.result;
+      const d = res?.result;
       console.log(res);
       if (d.success) {
         this.setData({

@@ -12,20 +12,20 @@
 </page-meta>
 <view 	 class="container">
   <!-- 开头动画 -->
-  <canvas type="2d" id="myCanvas" class="myCanvas" wx:if="{{!showLogo}}"></canvas>
+  <canvas type="2d" id="myCanvas" class="myCanvas" disable-scroll  wx:if="{{!showLogo}}"></canvas>
 <!-- 头像动画 -->
 <view class="turn {{end}}" wx:if="{{showLogo}}" bindtap="logoBackTop" bindanimationend="turnEnd" style="animation-play-state: {{state}}">
   <block wx:for="{{text}}" wx:key="index">
-  <span class="chat"  style=" transform:rotate({{(index-3)*20}}deg); ">
-    {{item}}
-  </span>
-</block>
+    <span class="chat"  style=" transform:rotate({{(index-3)*20}}deg); ">
+      {{item}}
+    </span>
+  </block>
   <view class="over" bindanimationend="overEnd" >
- <navigator  url="#"  hover-class="none"   class="head">
-  <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
+  <navigator  url="#"  hover-class="none"   class="head">
+    <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
   </navigator>
- <navigator  url="#" hover-class="none"  class="head " >
-  <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
+  <navigator  url="#" hover-class="none"  class="head " >
+    <image class="head_img" mode="widthFix" src="/images/midlogo.png" />
   </navigator>
 </view>
   </view>

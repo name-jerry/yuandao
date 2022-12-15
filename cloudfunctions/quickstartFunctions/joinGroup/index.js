@@ -50,8 +50,6 @@ exports.main = async (event, context) => {
     });
     return {
       success: true,
-      tel: g.tel,
-      groupId: u.groupId,
     };
   }
   return {

@@ -1,5 +1,5 @@
 // pages/user/user.js
-import { callCloud } from "../../common";
+import { getDataLocallyOrCloud } from "../../common";
 Page({
   /**
    * 页面的初始数据
@@ -26,24 +26,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    let user = wx.getStorageSync("user");
-    if (user) {
-      this.setData({
-        user,
-      });
-    } else {
-      callCloud("createUser").then(res => {
-        let _ = res.result;
-        if (_.success) {
-          wx.setStorageSync("user", _.data);
-          this.setData({
-            user: _.data,
-          });
-        }
-      });
-    }
-  },
+  onLoad(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -53,7 +36,19 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {},
+  onShow() {
+    getDataLocallyOrCloud("user").then(res => {
+      let user = res.result?.data || res;
+      user
+        ? this.setData({
+            user,
+          })
+        : wx.showToast({
+            title: "网络异常",
+            icon: "error",
+          });
+    });
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

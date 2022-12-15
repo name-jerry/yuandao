@@ -1,3 +1,4 @@
+import { getDataLocallyOrCloud } from "../../common";
 Page({
   data: {
     //开场动画属性
@@ -8,8 +9,9 @@ Page({
     height: "",
     rpx2px: "",
     list: [],
+    isFirstLogin: true,
     intervalCancel: "",
-    showLogo: true,
+    showLogo: false,
     logo: "",
     count: 0,
     logoCount: 0,
@@ -55,7 +57,26 @@ Page({
       { title: "我的小组", url: "/pages/groupList/groupList?isMyGroup=true" },
     ],
   },
-  onLoad() {},
+  onLoad() {
+    getDataLocallyOrCloud("user", false).then(res => {
+      if (res?.result?.success) {
+        this.setData({
+          user: res.result.data,
+          isFirstLogin: true,
+        });
+      } else if (res) {
+        this.setData({
+          user: res,
+          isFirstLogin: false,
+        });
+      } else {
+        wx.showToast({
+          title: "服务端错误,请联系我们",
+          icon: "error",
+        });
+      }
+    });
+  },
   onReady() {
     const that = this.data;
     const query = wx.createSelectorQuery();
@@ -83,7 +104,9 @@ Page({
         that.list = new Array(Math.floor(that.width / (that.rpx2px * 35))).fill(
           0
         );
-        // that.intervalCancel = setInterval(() => this.animation(), 60);
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        that.intervalCancel = setInterval(() => this.animation(), 60);
       });
   },
   animation() {
@@ -91,9 +114,21 @@ Page({
     const canvas = that.canvas;
     const ctx = that.ctx;
     that.count += 1;
-    if (that.count >= 60) {
-      if (that.logoCount <= 80) {
-        this.drawLogo(canvas);
+    //绘制数字雨水的时间
+    if (that.count < 60) {
+      this.drawCodeRain(canvas, 35 * this.data.rpx2px);
+      //不是第一次登陆时取消logo出现得动画
+    } else if (!that.isFirstLogin) {
+      clearInterval(that.intervalCancel);
+      this.logoBackTop();
+      this.setData({
+        nbBackgroundColor: "#8ba3c7",
+        showLogo: true,
+      });
+    } else {
+      // 绘制logo得时间
+      if (that.logoCount <= 50) {
+        this.drawLogo(canvas, 50);
         if (this.data.nbBackgroundColor == "#000000") {
           this.setData({
             nbBackgroundColor: "#8ba3c7",
@@ -108,17 +143,15 @@ Page({
           clearInterval(that.intervalCancel);
         });
       }
-    } else {
-      this.drawCodeRain(canvas, 35 * this.data.rpx2px);
     }
   },
 
   //logo
-  drawLogo(canvas) {
+  drawLogo(canvas, count) {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "rgba(255,255,255,0.03)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    const scaleSize = this.data.logoCount / 80;
+    const scaleSize = this.data.logoCount / count;
     const imgW = 5 * 35 * this.data.rpx2px;
     ctx.save();
     ctx.beginPath();

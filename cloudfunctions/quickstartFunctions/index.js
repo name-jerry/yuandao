@@ -1,5 +1,5 @@
 const getOpenId = require("./getOpenId/index");
-const createUser = require("./createUser/index");
+const getUser = require("./getUser/index");
 const updateUser = require("./updateUser/index");
 const createGroup = require("./createGroup/index");
 const getManyGroup = require("./getManyGroup/index");
@@ -10,8 +10,8 @@ exports.main = async (event, context) => {
   switch (event.type) {
     case "getOpenId":
       return await getOpenId.main(event, context);
-    case "createUser":
-      return await createUser.main(event, context);
+    case "getUser":
+      return await getUser.main(event, context);
     case "updateUser":
       return await updateUser.main(event, context);
     case "createGroup":

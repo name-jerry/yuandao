@@ -1,44 +1,44 @@
 <!--pages/form/form.wxml-->
 <view class='container'>
-<form  action="" bindsubmit="submit">
+<form  action="" bindsubmit="submit" bindreset="reset" >
   <view class="box flex_box ">
     <text class="fieldset bloder">信息</text>
     <view class="flex_item name">
         姓名:
-    <input type="text" value="{{user.name}}"  name="name" class="input"/>
+    <input type="text" value="{{user.name}}"  name="name" class="input" data-type='name'  bindinput="input"/>
     </view>
     <view class="flex_item sex">
       性别:
-    <radio-group name='sex'  class="content" >
+    <radio-group name='sex' data-type='sex'  class="content" bindchange="change" >
     <label ><radio value='man' checked="{{user.sex=='man'}}" />  男</label>
     <label><radio value='woman' checked="{{user.sex=='woman'}}" />  女</label>
     </radio-group>
     </view>
     <view class="flex_item age">
         出生年月:
-        <picker mode="date" value="{{age}}"  name='age' class="content" data-type='age' fields="day" 
-        start="1960-01-01" end="2022-09-01" bindchange="pickerChange" >
+        <picker mode="date" value="{{user.age}}"  name='age' class="content" data-type='age' fields="day" 
+        start="1960-01-01" end="2022-09-01" bindchange="change" >
     <view  class="input">
-       {{age}}
+       {{user.age}}
     </view>
   </picker>
     </view>
-      <view class="flex_item area">
+      <view class="flex_item area" >
         地区(可选):
-        <picker mode="region" value="{{area}}" name='area' class="content" data-type='area' custom-item='全部' 
-        bindchange="pickerChange">
+        <picker mode="region" value="{{user.area}}" name='area' class="content" data-type='area' 
+        bindchange="change">
     <view class="input " >
-       {{area[0]}}{{area[1]}}{{area[2]}}
+       {{user.area[0]}}{{user.area[1]}}{{user.area[2]}}
     </view>
   </picker>
     </view>
     <view class="web flex_item" >
       个人网站:
-      <input type="text" name="web" class="input" placeholder-style=" font-family: Tahoma, Verdana, kaiti, Times, serif;" placeholder="展示你的作品"/>
+      <input type="text" name="web" class="input" value="{{user.web}}" data-type='web' bindinput="input" placeholder-style=" font-family: Tahoma, Verdana, kaiti, Times, serif;" placeholder="展示你的作品"/>
     </view>
      <view class="info flex_item" >
       个性签名
-      <textarea name="info" class="input"  placeholder="60字以内"></textarea>
+      <textarea name="info" class="input" value='{{user.info}}' data-type='info' bindinput="input"  placeholder="60字以内"></textarea>
     </view>
     <view  class="flex_item btnGroup">
     <button class="btn" hover-class="active" form-type="submit" >提交</button>

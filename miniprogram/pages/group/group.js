@@ -1,4 +1,4 @@
-import { callCloud } from "../../common.js";
+import { callCloud, check, getDataLocallyOrCloud } from "../../common.js";
 // pages/form/form.js
 Page({
   /**
@@ -7,20 +7,11 @@ Page({
   data: {
     showLevel: false,
     showAge: false,
-    groupId: "",
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    if (options && options.groupId) {
-      console.log(options.groupId);
-      this.setData({
-        groupId: options.groupId,
-      });
-    }
-  },
+  onLoad(options) {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -52,18 +43,33 @@ Page({
     delete data.level;
     delete data.age;
     data.permission = !!+data.permission;
-    console.log({ ...data });
     callCloud("createGroup", { ...data }).then(res => {
-      console.log(res);
-      let data = res.result;
-      if (data.success) {
+      check(res);
+      if (res?.result?.success) {
         wx.showToast({
           title: "成功",
           icon: "success",
         });
+        let groupId = res.result.data;
+        getDataLocallyOrCloud("user").then(res => {
+          let user = res?.result?.data || res;
+          if (user) {
+            user.groupList
+              ? user.groupList.push(groupId)
+              : (user.groupList = [groupId]);
+            user.leaderGroup = groupId;
+            wx.setStorageSync("user", user);
+            wx.redirectTo({ url: "/pages/groupList/groupList?isMyGroup=true" });
+          } else {
+            wx.showToast({
+              title: "服务器异常,请联系我们",
+              icon: "error",
+            });
+          }
+        });
       } else {
         wx.showToast({
-          title: "失败",
+          title: res?.result?.errorMessage || "未知错误",
           icon: "error",
         });
       }

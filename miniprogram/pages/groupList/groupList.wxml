@@ -44,15 +44,15 @@
                         </view>
                         </view>
                         <view class='row btn_group'>
-                        <button class="btn"  wx:if="{{!isMyGroup}}" hover-class="active">{{item.permission?'加入小组':'申请加入'}}</button>
-                        <block wx:else>  
-                        <button class="btn" wx:if="{{false}}" hover-class="active">退出小组</button>
-                        <block wx:else>  
-                        <button class="btn" wx:if="{{false}}" hover-class="active">修改资料</button>
-                        <button class="btn"   hover-class="active">审核申请</button>
-                        </block>
-                        <button class="btn"   hover-class="active">小组成员</button>
-                        </block>
+                            <button class="btn"  wx:if="{{!isMyGroup}}" hover-class="active">{{item.permission?'加入小组':'申请加入'}}</button>
+                            <block wx:else>  
+                                <button class="btn" wx:if="{{user.leaderGroup!=item.groupId}}" hover-class="active">退出小组</button>
+                                    <block wx:else>  
+                                        <button class="btn"  hover-class="active">修改资料</button>
+                                        <button class="btn"   hover-class="active">审核申请</button>
+                                    </block>
+                                <button class="btn"   hover-class="active">小组成员</button>
+                            </block>
                         </view>
                 </view>
             </view>

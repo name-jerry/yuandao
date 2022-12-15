@@ -12,9 +12,16 @@ exports.main = async (event, context) => {
   const { name, type, permission, limit, info } = u;
   const wxContext = cloud.getWXContext();
   const openId = wxContext.OPENID;
+  //是否已经是队长
+  let userRes = await db.collection("userList").where({ openId }).get();
+  if (userRes?.data?.[0]?.leaderGroup)
+    return {
+      success: false,
+      errorMessage: "已经创建过一个小组",
+    };
   //获取小组id
   let res = await db.collection("groupList").count();
-  let groupId = parseInt(res.total) + 1;
+  let groupId = +res.total + 1;
   await db.collection("groupList").add({
     data: {
       name,
@@ -27,7 +34,17 @@ exports.main = async (event, context) => {
       groupId,
     },
   });
+  await db
+    .collection("userList")
+    .where({ openId })
+    .update({
+      data: {
+        groupList: _.push([groupId]),
+        leaderGroup: groupId,
+      },
+    });
   return {
     success: true,
+    data: groupId,
   };
 };
