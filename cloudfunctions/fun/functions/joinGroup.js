@@ -1,4 +1,4 @@
-exports.main = async (args, db, openId, ctx) => {
+module.exports = async (args, db, openId, ctx) => {
   //获取小组id
   let res = await db
     .collection("group")

@@ -1,4 +1,4 @@
-exports.main = async (args, db, openId, ctx) => {
+module.exports = async (args, db, openId, ctx) => {
   const { headImg, name, sex, age, area, web, info } = args;
   let d = await db.collection("userList").where({ openId }).update({
     data: {

@@ -1,12 +1,4 @@
-const cloud = require("wx-server-sdk");
-
-cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV,
-});
-
-const db = cloud.database();
-
-exports.main = async (args, db, openId, ctx) => {
+module.exports = async (args, db, openId, ctx) => {
   const _ = db.command;
   const { name, type, permission, limit, info } = args;
   //是否已经是队长

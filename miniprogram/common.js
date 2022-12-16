@@ -28,15 +28,15 @@ function withLoading(fn) {
 }
 
 const defaultOption = {
-  name: "quickstartFunctions",
+  name: "fun",
   data: {
-    type: "createGroup",
-    data: {},
+    api: "",
+    args: {},
   },
 };
-function callCloud(type, data, isShowLoading = true) {
-  defaultOption.data.type = type;
-  defaultOption.data.data = data || "";
+function callCloud(api, args, isShowLoading = true) {
+  defaultOption.data.api = api;
+  defaultOption.data.args = args || "";
   if (isShowLoading) {
     return withLoading(wx.cloud.callFunction)(defaultOption);
   } else {

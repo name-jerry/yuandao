@@ -1,4 +1,4 @@
-exports.main = async (args, db, openId, ctx) => {
+module.exports = async (args, db, openId, ctx) => {
   //获取openId
   let d = await db.collection("userList").where({ openId }).get();
   //无此人,初次登录,注册一个人物,并返回res

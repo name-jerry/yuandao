@@ -1,5 +1,5 @@
 // 查询数据库集合云函数入口函数
-exports.main = async (args, db, openId, ctx) => {
+module.exports = async (args, db, openId, ctx) => {
   const { isMyGroup } = args;
   const _ = db.command;
   let res;

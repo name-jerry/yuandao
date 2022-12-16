@@ -1,1 +1,1 @@
-module.exports=["createGroup.js","getManyForm.js","getManyGroup.js","getMyForm.js","getOpenId.js","getUser.js","joinGroup.js","updateUser.js"]
+module.exports=["createGroup.js","getManyGroup.js","getUser.js","joinGroup.js","updateUser.js"]
