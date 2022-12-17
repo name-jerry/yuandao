@@ -4,13 +4,9 @@ module.exports = async (args, db, openId, ctx) => {
   const _ = db.command;
   let res;
   if (isMyGroup) {
-    let userRes = await db.collection("userList").where({ openId }).get();
-    let groupList =
-      userRes && userRes.data && userRes.data[0] && userRes.data[0].groupList;
-    if (!groupList)
-      return {
-        data: [],
-      };
+    let user = await db.collection("userList").doc(openId).get();
+    let groupList = user.data?.groupList;
+    if (!groupList) return [];
     console.log("0");
     res = await db
       .collection("groupList")
@@ -25,7 +21,5 @@ module.exports = async (args, db, openId, ctx) => {
       .orderBy("groupId", "asc")
       .get();
   }
-  return {
-    data: [...res.data],
-  };
+  return [...res.data];
 };

@@ -18,16 +18,11 @@ exports.main = async (event, context) => {
     if (typeof fun.get(event.api) !== "function") {
       throw new Error("No api");
     }
-    const { data } = await fun.get(event.api)(
-      event.args,
-      db,
-      wxContext.OPENID,
-      {
-        cloud,
-        appId: wxContext.APPID,
-        unionId: wxContext.UNIONID,
-      }
-    );
+    const data = await fun.get(event.api)(event.args, db, wxContext.OPENID, {
+      cloud,
+      appId: wxContext.APPID,
+      unionId: wxContext.UNIONID,
+    });
     return {
       success: true,
       data,
