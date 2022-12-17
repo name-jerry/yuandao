@@ -45,32 +45,6 @@
   right: -2rem;
   bottom: -2rem;
 }
-.turn::before {
-  position: absolute;
-  content: "";
-  visibility: hidden;
-  width: 2rem;
-  height: 2rem;
-  left: -1.8rem;
-  top: 50%;
-  border-top-right-radius: 2rem;
-  box-shadow: 0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
-}
-.turn::after {
-  position: absolute;
-  visibility: hidden;
-  content: "";
-  z-index: -1;
-  width: 2rem;
-  height: 2rem;
-  right: -1.8rem;
-  top: 50%;
-  border-top-left-radius: 2rem;
-  box-shadow: -0.5rem -0.5rem 0rem rgba(255, 255, 255, 0.6);
-}
-.turn.end::before, .turn.end::after {
-  visibility: visible;
-}
 .turn.end .over {
   box-shadow: var(--shadow), 0rem 0rem 0rem 0.2rem var(--color-white);
 }

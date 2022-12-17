@@ -34,9 +34,9 @@ const defaultOption = {
     args: {},
   },
 };
-function callCloud(api, args, isShowLoading = true) {
+function callCloud(api, args = {}, isShowLoading = true) {
   defaultOption.data.api = api;
-  defaultOption.data.args = args || "";
+  defaultOption.data.args = args;
   if (isShowLoading) {
     return withLoading(wx.cloud.callFunction)(defaultOption);
   } else {

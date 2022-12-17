@@ -35,7 +35,7 @@ module.exports = async (args, db, openId, ctx) => {
       },
     });
     return {
-      success: true,
+      data: {},
     };
   }
   throw new Error("无该小组");

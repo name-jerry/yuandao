@@ -5,7 +5,7 @@ let fun = new Map();
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV,
 });
-const db = cloud.database();
+const db = cloud.database({ throwOnNotFound: false });
 files.map(fileName => {
   const name = fileName.replace(".js", "");
   fun.set(name, require("./functions/" + fileName));
@@ -18,11 +18,20 @@ exports.main = async (event, context) => {
     if (typeof fun.get(event.api) !== "function") {
       throw new Error("No api");
     }
-    return await fun.get(event.api)(event.args, db, wxContext.OPENID, {
-      cloud,
-      appId: wxContext.APPID,
-      unionId: wxContext.UNIONID,
-    });
+    const { data } = await fun.get(event.api)(
+      event.args,
+      db,
+      wxContext.OPENID,
+      {
+        cloud,
+        appId: wxContext.APPID,
+        unionId: wxContext.UNIONID,
+      }
+    );
+    return {
+      success: true,
+      data,
+    };
   } catch (error) {
     console.log(error);
     return {

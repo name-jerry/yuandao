@@ -13,9 +13,9 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/group.png",
-        "selectedIconPath": "images/sgroup.png",
-        "text": "社区"
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/shome.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/user/user",

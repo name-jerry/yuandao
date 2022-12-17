@@ -30,7 +30,6 @@ module.exports = async (args, db, openId, ctx) => {
       },
     });
   return {
-    success: true,
     data: groupId,
   };
 };

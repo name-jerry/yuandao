@@ -15,13 +15,11 @@ module.exports = async (args, db, openId, ctx) => {
     };
     await db.collection("userList").add({ data });
     return {
-      success: true,
       data,
     };
   }
   //有此人返回数据
   return {
-    success: true,
     data: d.data[0],
   };
 };

@@ -26,11 +26,11 @@ Page({
     });
     callCloud("getManyGroup", { isMyGroup }).then(res => {
       const d = res?.result;
-      console.log(res);
       if (d.success) {
         this.setData({
           groupList: d.data,
         });
+        console.log(this.data.groupList);
       } else {
         wx.showToast({
           title: d.errorMessage,

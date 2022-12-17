@@ -13,7 +13,7 @@ module.exports = async (args, db, openId, ctx) => {
   });
   if (d.stats.updated)
     return {
-      success: true,
+      data: {},
     };
 
   //前端屏蔽了无更新得上传,如果还是出现updated为0时需检查

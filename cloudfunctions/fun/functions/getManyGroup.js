@@ -9,7 +9,6 @@ module.exports = async (args, db, openId, ctx) => {
       userRes && userRes.data && userRes.data[0] && userRes.data[0].groupList;
     if (!groupList)
       return {
-        success: true,
         data: [],
       };
     console.log("0");
@@ -27,7 +26,6 @@ module.exports = async (args, db, openId, ctx) => {
       .get();
   }
   return {
-    success: true,
     data: [...res.data],
   };
 };
