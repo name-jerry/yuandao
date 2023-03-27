@@ -37,10 +37,14 @@ const defaultOption = {
 function callCloud(api, args = {}, isShowLoading = true) {
   defaultOption.data.api = api;
   defaultOption.data.args = args;
-  if (isShowLoading) {
-    return withLoading(wx.cloud.callFunction)(defaultOption);
-  } else {
-    return wx.cloud.callFunction(defaultOption);
+  try {
+    if (isShowLoading) {
+      return withLoading(wx.cloud.callFunction)(defaultOption);
+    } else {
+      return wx.cloud.callFunction(defaultOption);
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 }
 //根据key搜索缓存,缓存没有就去查询云端,云端有数据就返回并存入本地
@@ -60,7 +64,7 @@ function getDataLocallyOrCloud(key, isShowLoading) {
       });
     }
   }).catch(error => {
-    console.log(`getDataLocallyOrCloud(${key})函数错误:${error}`);
+    console.log(`getDataLocallyOrCloud(${key})函数错误:${error.message}`);
   });
 }
 function check(res) {

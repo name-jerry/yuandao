@@ -4,7 +4,7 @@
         <navigator  class="a" url="/pages/form/form?type=updateUser" hover-class="active" open-type="navigate" >修改资料</navigator>
         <image class="img" mode="widthFix" src="{{user.headImg}}" />
         <text class="name">{{user.name}}</text>
-        <view class="id">ID:{{user.openId}}</view>
+        <view class="id">ID:{{user._id}}</view>
         <!-- 资源-->
         <view class="flex_box resource">
             <block wx:for="{{infoList}}" wx:key="index">
